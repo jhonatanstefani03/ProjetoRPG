@@ -32,8 +32,8 @@ class Mago(Player):
     
     def usar_ataque_especial(self):
         dano_especial = self.ataque * 3
-        return dano_especial
         print('dano Especial de fogo!! ')# 30% a mais de dano
+        return dano_especial
 
 
 
