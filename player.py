@@ -22,7 +22,7 @@ class Player:
         return f"{self.nome} se defendeu, reduzindo o dano em {defesa_total:.2f}!"
 
     def curar(self):
-        vida_recuperada = self.cura * 1.5
+        vida_recuperada = self.cura * 2
         self.hp += vida_recuperada
           # Atualiza o HP do jogador
         
