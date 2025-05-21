@@ -49,6 +49,7 @@ class Guerreiro(Player):
 
     def usar_ataque_especial(self):
         dano_especial = self.ataque * 2
+        print('dano Especial Espada Flamejante!!')
         return dano_especial# 30% a mais de dano
 
         
