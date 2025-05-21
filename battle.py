@@ -65,7 +65,8 @@ def turno_batalha(jogador, monstro):
 
             monstro.hp -= dano
             print(f"{jogador.nome} causou {dano:.2f} de dano! HP do {monstro.nome}: {monstro.hp}")
-            print(f"{monstro.nome} reage: \"{monstro.frase_dano()}\"")
+            if dano > 0:
+                print(f"{monstro.nome} reage: \"{monstro.frase_dano()}\"")
 
         elif escolha == "2":
             frase = jogador.frase_defesa()
@@ -100,7 +101,8 @@ def turno_batalha(jogador, monstro):
 
         jogador.hp -= dano_monstro
         print(f"{monstro.nome} causou {dano_monstro:.2f} de dano! HP do {jogador.nome}: {jogador.hp}")
-        print(f"{jogador.nome} reage: \"{jogador.frase_dano()}\"")
+        if dano_monstro > 0:
+            print(f"{jogador.nome} reage: \"{jogador.frase_dano()}\"")
 
         if jogador.hp <= 0:
             print(f"\n{jogador.nome} foi derrotado! 💀")
