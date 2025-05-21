@@ -23,7 +23,13 @@ class Player:
 
     def curar(self):
         vida_recuperada = self.cura * 1.5
-        return vida_recuperada# Cura aumentada em 50%
+        self.hp += vida_recuperada
+          # Atualiza o HP do jogador
+        
+        if self.hp > self.hp_max:
+            self.hp = self.hp_max
+        print(f"DEBUG: {self.nome} curou {vida_recuperada:.2f}. HP atualizado para {self.hp:.2f}")
+        
 
     def restaurar_hp(self):
         self.hp = self.hp  # Restaura o HP ao valor inicial

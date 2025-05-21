@@ -1,13 +1,13 @@
 import time
-
+import sys
 from player import *
 from monster import Goblin, Orc, Dragao, FinalBoss
 
 
-# Substitua pelo nome correto do seu arquivo
+
 
 def turno_batalha(jogador, monstro):
-    print(f"\nA batalha contra {monstro.nome} começa! ⚔️")
+    digitar_texto(f"\nA batalha contra {monstro.nome} começa! ⚔️")
     
     while jogador.hp > 0 and monstro.hp > 0:
         
@@ -38,12 +38,12 @@ def turno_batalha(jogador, monstro):
             print(f"{jogador.nome} se defendeu, aumentando defesa para {defesa}!")
 
         elif escolha == "3":
-            cura = jogador.curar()
-            print(f"{jogador.nome} se curou, recuperando {cura:.2f} pontos de vida! HP atual: {jogador.hp}")
+            jogador.curar()
+            print(f"{jogador.nome} se curou, recuperando  pontos de vida! HP atual: {jogador.hp}")
 
         if monstro.hp <= 0:
             jogador.hp =jogador.hp_max
-            print(f"\n{monstro.nome} foi derrotado! 🎉")
+            digitar_texto(f"\n{monstro.nome} foi derrotado! 🎉")
             print(jogador.restaurar_hp())  # Restaura o HP ao valor inicial
 
             break
@@ -59,8 +59,34 @@ def turno_batalha(jogador, monstro):
 
         input("\nPressione ENTER para o próximo turno...")
 
+
+def digitar_texto(texto, velocidade=0.05):
+    for caractere in texto:
+        sys.stdout.write(caractere)
+        sys.stdout.flush()
+        time.sleep(velocidade)
+    print()
+
+
+def introducao():
+    digitar_texto('“Aê, meu filho! Estamos sendo\natacados por criaturas\ninimagináveis. E você! Um novato,')
+    digitar_texto( '\nnoob, nível 0, da ralé... Cof, cof...\nBem, quer dizer, todo o Reino')
+    digitar_texto ('\nacredita que você é o escolhido\npara nos salvar.\nPortanto, sem delongas,')
+    digitar_texto('\nescolha sua classe e vai pro fight!”')
+
+    escolha = input("Digite '1' para começar ou 'sair' para deixar a aventura: ").strip().lower()
+    
+    if escolha == "1":
+        iniciar_jogo()
+    else:
+       digitar_texto("\n👋 Adeus, viajante! Que sua jornada um dia recomece!")
+
+
+
+
+
 def iniciar_jogo():
-    print("\n🎮 Bem-vindo ao RPG de Turnos! 🎮")
+    digitar_texto("\n🎮 Bem-vindo ao RPG de Turnos! 🎮")
     jogador = escolher_classe()
 
     inimigos = [Goblin(), Orc(), Dragao()]  # Agora usamos as classes de monstros!
@@ -68,16 +94,17 @@ def iniciar_jogo():
     for inimigo in inimigos:
         turno_batalha(jogador, inimigo)
         if jogador.hp <= 0:
-            print("\nGAME OVER! Tente novamente.")
+            digitar_texto("\nGAME OVER! Tente novamente.")
             return
 
-    print("\n🔥 O chefe final apareceu! É o Rei Demônio! 🔥")
+    digitar_texto("\n🔥 O chefe final apareceu! É o Rei Demônio! 🔥")
     boss = FinalBoss()
     turno_batalha(jogador,boss)
 
-    print("\n🏆 PARABÉNS! Você derrotou todos os inimigos e venceu o jogo! 🎉")
+    digitar_texto("\n🏆 PARABÉNS! Você derrotou todos os inimigos e venceu o jogo! 🎉")
+
+introducao()
 
 
 
-# Iniciar o jogo
-iniciar_jogo()
+
