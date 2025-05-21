@@ -1,3 +1,5 @@
+import random
+
 class Player:
     def __init__(self,nome,ataque,defesa,cura, hp):
         self.nome = nome
@@ -8,7 +10,12 @@ class Player:
         self.hp_max = hp
         
     def atacar(self):
+        frase = self.frase_ataque()  # Obtém a frase aleatória da classe específica
+        
         return self.ataque
+
+    def frase_ataque(self):
+        return "Ataque realizado!"
 
     def defender(self):
         defesa_total = self.defesa * 1.2  # Defesa aumentada em 20% ao ativar
@@ -29,11 +36,20 @@ class Mago(Player):
         self.ataque_especial = 'bola de fogo'
 
       
-    
+    def frase_ataque(self):
+        frases_mago = [
+            "\nSinta o poder do meu... cajadão!",
+            "\nAbracadabra! Ou era Abacatebraba... enfim, toma!",
+            " \nUé, funcionou? FUNCIONOU! Anota aí, primeiro sucesso da carreira!"
+        ]
+        print(random.choice(frases_mago))
+
     def usar_ataque_especial(self):
         dano_especial = self.ataque * 3
-        print('dano Especial de fogo!!')# 30% a mais de dano
+        print("🔥 Magia suprema ativada! 🔥")
         return dano_especial
+    
+
 
 
 
@@ -45,12 +61,19 @@ class Guerreiro(Player):
         self.ataque_especial = "Golpe Poderoso"
 
      
-    
+    def frase_ataque(self):
+        frases_guerreiro = [
+             "BOOOM! ISSO que eu chamo de aperto de mão!",
+             "Derrubei? Hmmm… pensei que fosse mais forte.",
+              "Tá sentindo esse cheiro? É cheiro de vitória (ou queimado, sei lá)."
+        ]
+        print(random.choice(frases_guerreiro))
 
     def usar_ataque_especial(self):
         dano_especial = self.ataque * 2
-        print('dano Especial Espada Flamejante!!')
-        return dano_especial# 30% a mais de dano
+        print("⚔️ Espada Flamejante em ação! ⚔️")
+        return dano_especial
+
 
         
 
