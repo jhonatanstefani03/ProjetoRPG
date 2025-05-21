@@ -10,7 +10,7 @@ def turno_batalha(jogador, monstro):
     print(f"\nA batalha contra {monstro.nome} começa! ⚔️")
     
     while jogador.hp > 0 and monstro.hp > 0:
-        jogador.hp = jogador.hp_max
+        
         print(f"\nHP do {jogador.nome}: {jogador.hp} | HP do {monstro.nome}: {monstro.hp}")
         print("Escolha sua ação:")
         print("1 - Atacar")
@@ -42,6 +42,7 @@ def turno_batalha(jogador, monstro):
             print(f"{jogador.nome} se curou, recuperando {cura:.2f} pontos de vida! HP atual: {jogador.hp}")
 
         if monstro.hp <= 0:
+            jogador.hp =jogador.hp_max
             print(f"\n{monstro.nome} foi derrotado! 🎉")
             print(jogador.restaurar_hp())  # Restaura o HP ao valor inicial
 
