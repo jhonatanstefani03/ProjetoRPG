@@ -1,7 +1,7 @@
 import random
 
 
-# Subclasses de monstros com características únicas
+# Subclasses de monstros com características únicas---------
 class Monsters:
     def __init__(self, nome, dano, defesa, hp):
         self.nome = nome
@@ -14,7 +14,7 @@ class Monsters:
 
     def defender(self):
         return self.defesa * 1.1  # Defesa aumentada em 10%
-
+#--------------------------------Goblin(Monsters)---------------------------------------
 class Goblin(Monsters):
     def __init__(self):
         super().__init__("Goblin Agricultor", dano=8, defesa=4, hp=40)
@@ -67,7 +67,7 @@ class Goblin(Monsters):
         ]
         return random.choice(frases)
 
-
+#-------------------------------Orc(Monsters)----------------------------------------
 class Orc(Monsters):
     def __init__(self):
         super().__init__("Orc Maromba", dano=12, defesa=6, hp=50)
@@ -112,15 +112,15 @@ class Orc(Monsters):
         ]
         return random.choice(frases)
 
-def frase_derrota(self):
-    frases = [
+    def frase_derrota(self):
+        frases = [
         "Caí...",
         "A proteína... me abandonou...",
         "Foi-se minha vida de marombeiro..."
     ]
-    return random.choice(frases)
+        return random.choice(frases)
 
-
+#------------------------------Esqueleto(Monsters)-----------------------------------------
 class Esqueleto(Monsters):
     def __init__(self):
         super().__init__("Esqueleto Coach", dano=8, defesa=4, hp=40)
@@ -165,14 +165,14 @@ class Esqueleto(Monsters):
         ]
         return random.choice(frases)
 
-def frase_derrota(self):
-    frases = [
-        "Meu mindset... quebrou junto com a bacia!",
-        "Me explodiu em pedaços... A última coisa que vi passar na frente dos meus olhos foi... minha bunda...",
-        "Mente blindada... ossos nem tanto!"
-    ]
-    return random.choice(frases)
-
+    def frase_derrota(self):
+        frases = [
+            "Meu mindset... quebrou junto com a bacia!",
+            "Me explodiu em pedaços... A última coisa que vi passar na frente dos meus olhos foi... minha bunda...",
+            "Mente blindada... ossos nem tanto!"
+        ]
+        return random.choice(frases)
+#-----------------------------------Troll(Monsters)------------------------------------
 class Troll(Monsters):
     def __init__(self):
         super().__init__("Troll do Wifi Ruim", dano=12, defesa=6, hp=50)
@@ -217,14 +217,14 @@ class Troll(Monsters):
         ]
         return random.choice(frases)
 
-def frase_derrota(self):
-    frases = [
+    def frase_derrota(self):
+        frases = [
         "Aaaaaaai... foi lag! Eu juro!",
         "Desconectando... última mensagem: eu vou voltar!",
         "Fui trollado pelo destino...."
-    ]
-    return random.choice(frases)
-
+        ]
+        return random.choice(frases)
+#------------------------------FinalBoss(Monsters)-----------------------------------------
 class FinalBoss(Monsters):
     def __init__(self):
         super().__init__("ERROR-9090", dano=25, defesa=20, hp=100)
