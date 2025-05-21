@@ -2,7 +2,7 @@ import time
 import sys
 import msvcrt
 from player import *
-from monster import Goblin, Orc, Dragao, FinalBoss
+from monster import Goblin, Orc, Esqueleto, Troll, FinalBoss
 
 import pygame
 
@@ -22,14 +22,17 @@ def trocar_musica(nova_musica):
     tocar_musica(nova_musica, repetir=True)
 
 
-#FIM FUNÇAO MUSICA PYGAME
+#FIM FUNÇAO MUSICA PYGAME----------------------------------------------------------------
 
+#INTRODUÇÃO DO TURNO------------------------------------------------------------------
 def turno_batalha(jogador, monstro):
     tocar_musica('musicas\\musica.mp3')
-    digitar_texto(f"\nA batalha contra {monstro.nome} começa! ⚔️")
-    
+    digitar_texto(f"\nUm novo inimigo surge... 👀")
+    digitar_texto(f"\nÉ o temido {monstro.nome}!")
+    digitar_texto(f"\n{monstro.nome} diz: \"{monstro.frase_entrada()}\"")
+
     while jogador.hp > 0 and monstro.hp > 0:
-        
+ #TURNO DO JOGADOR !!!--------------------------------------------------------------------       
         print(f"\nHP do {jogador.nome}: {jogador.hp} | HP do {monstro.nome}: {monstro.hp}")
         print("Escolha sua ação:")
         print("1 - Atacar")
@@ -45,41 +48,73 @@ def turno_batalha(jogador, monstro):
             tipo_ataque = input("Digite sua escolha: ")
 
             if tipo_ataque == "1":
-                dano = jogador.atacar()
+                if random.random() < 0.15:  # adiciona 15% de chance de errar
+                    digitar_texto(f"{jogador.nome} diz: \"{jogador.frase_erro()}\"")
+                    dano = 0
+                else:
+                    digitar_texto(f"{jogador.nome} diz: \"{jogador.frase_ataque()}\"")
+                    dano = jogador.atacar()
+
             elif tipo_ataque == "2":
-                dano = jogador.usar_ataque_especial()
+                if random.random() < 0.20:  # 20% de chance de errar especial
+                    print(f"{jogador.nome} tentou usar {jogador.ataque_especial}, mas...")
+                    print(f"{jogador.nome} diz: \"{jogador.frase_erro()}\"")
+                    dano = 0
+                else:
+                    print(f"{jogador.nome} usou {jogador.ataque_especial}!")
+                    dano = jogador.usar_ataque_especial()
 
             monstro.hp -= dano
             print(f"{jogador.nome} causou {dano:.2f} de dano! HP do {monstro.nome}: {monstro.hp}")
+            if dano > 0:
+                print(f"{monstro.nome} reage: \"{monstro.frase_dano()}\"")
 
         elif escolha == "2":
+            frase = jogador.frase_defesa()
             defesa = jogador.defender()
+            print(f"{jogador.nome} diz: \"{frase}\"")
             print(f"{jogador.nome} se defendeu, aumentando defesa para {defesa}!")
 
         elif escolha == "3":
+            frase = jogador.frase_cura()
             jogador.curar()
-            print(f"{jogador.nome} se curou, recuperando  pontos de vida! HP atual: {jogador.hp}")
+            print(f"{jogador.nome} diz: \"{frase}\"")
+            print(f"{jogador.nome} se curou! HP atual: {jogador.hp}")
 
         if monstro.hp <= 0:
             jogador.hp =jogador.hp_max
             trocar_musica('musicas\\vitoria.mp3')
             digitar_texto(f"\n{monstro.nome} foi derrotado! 🎉")
+            print(f"{monstro.nome} diz: \"{monstro.frase_derrota()}\"")
             input("Pressione ENTER para continuar...")
             print(jogador.restaurar_hp())  # Restaura o HP ao valor inicial
             trocar_musica("musicas\\musica.mp3")
             break
+#TURNO DO MONSTRO -------------------------------------------------------------------------
+        time.sleep(1)
+        digitar_texto(f"\nTurno do {monstro.nome}:")
+        if random.random() < 0.15:
+            print(f"{monstro.nome} diz: \"{monstro.frase_erro()}\"")
+            dano_monstro = 0
+        else:
+            frase = monstro.frase_ataque()
+            digitar_texto(f"{monstro.nome} diz: \"{frase}\"")
+            dano_monstro = monstro.atacar()
 
-        print(f"\nTurno do {monstro.nome}:")
-        dano_monstro = monstro.atacar()
         jogador.hp -= dano_monstro
-        print(f"{monstro.nome} atacou e causou {dano_monstro:.2f} de dano! HP do {jogador.nome}: {jogador.hp}")
-
+        print(f"{monstro.nome} causou {dano_monstro:.2f} de dano! HP do {jogador.nome}: {jogador.hp}")
+        if dano_monstro > 0:
+            print(f"{jogador.nome} reage: \"{jogador.frase_dano()}\"")
+#---------------------------------------------------------------------------------
+#JOGADOR  DERROTADO!!----------------------------------------------------------
         if jogador.hp <= 0:
             print(f"\n{jogador.nome} foi derrotado! 💀")
+            print(f"{jogador.nome} diz: \"{jogador.frase_derrota()}\"")
             break
-
+#-----------------------------------------------------------------
+#BOTAO DE TURNO--------------------------------------------------
         input("\nPressione ENTER para o próximo turno...")
-
+#-----------------------------------------------------------------
 
 def digitar_texto(texto, velocidade=0.05):
     for caractere in texto:
@@ -123,7 +158,7 @@ def iniciar_jogo():
     digitar_texto("\n🎮 Bem-vindo ao RPG de Turnos! 🎮")
     jogador = escolher_classe()
 
-    inimigos = [Goblin(), Orc(), Dragao()]  # Agora usamos as classes de monstros!
+    inimigos = [Goblin(), Orc(), Esqueleto(), Troll()]  # Agora usamos as classes de monstros!
 
     for inimigo in inimigos:
         turno_batalha(jogador, inimigo)
