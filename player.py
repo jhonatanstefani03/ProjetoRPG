@@ -1,5 +1,6 @@
 import random
 
+#----------------- CLASSE PLAYER-----------------------------------------------------
 class Player:
     def __init__(self,nome,ataque,defesa,cura, hp):
         self.nome = nome
@@ -8,6 +9,7 @@ class Player:
         self.cura = cura
         self.hp = hp
         self.hp_max = hp
+        self.defesa_base = defesa
         
     def atacar(self):
         frase = self.frase_ataque()  # Obtém a frase aleatória da classe específica
@@ -18,11 +20,12 @@ class Player:
         return "Ataque realizado!"
 
     def defender(self):
-        defesa_total = self.defesa * 1.2  # Defesa aumentada em 20% ao ativar
-        return f"{self.nome} se defendeu, reduzindo o dano em {defesa_total:.2f}!"
+        self.defesa *= 1.2  # Defesa aumentada em 20% ao ativar
+        print (f"{self.nome} se defendeu, reduzindo o dano em {self.defesa:.2f}!")
+        return self.defesa
 
     def curar(self):
-        vida_recuperada = self.cura * 2
+        vida_recuperada = self.cura * 5
         self.hp += vida_recuperada
           # Atualiza o HP do jogador
         
@@ -34,12 +37,13 @@ class Player:
     def restaurar_hp(self):
         self.hp = self.hp  # Restaura o HP ao valor inicial
         return f"{self.nome} recuperou todo o HP após vencer a batalha! 💖"
-
-
+#------------------------------------------------------------------------------------
+#----------------- CLASSE MAGO-----------------------------------------------------
 class Mago(Player):
     def __init__(self):
         super().__init__(nome='Mago', ataque=10, defesa=5, cura=8, hp=70)
         self.ataque_especial = 'bola de fogo'
+        
 
     def frase_ataque(self):
         frases = [
@@ -93,9 +97,9 @@ class Mago(Player):
         dano_especial = self.ataque * 3
         print("🔥 Magia suprema ativada! 🔥")
         return dano_especial
-    
+#------------------------------------------------------------------------------------    
 
-
+#----------------- CLASSE GUERREIRO-----------------------------------------------------
 class Guerreiro(Player):
     def __init__(self):
         super().__init__(nome='Guerreiro', ataque=12, defesa=8, cura=5, hp=90)
@@ -153,9 +157,9 @@ class Guerreiro(Player):
         dano_especial = self.ataque * 2
         print("⚔️ Espada Flamejante em ação! ⚔️")
         return dano_especial
-
+#------------------------------------------------------------------------------------
         
-
+#---------------------------ESCOLHER PERSONAGEM---------------------------------------------------
 def escolher_classe():
     print("Escolha sua classe:")
     print("1 - Mago 🪄")
@@ -170,3 +174,4 @@ def escolher_classe():
     else:
         print("Escolha inválida! Tente novamente.")
         return escolher_classe()
+#------------------------------------------------------------------------------------

@@ -26,6 +26,7 @@ def trocar_musica(nova_musica):
 
 #INTRODUÇÃO DO TURNO------------------------------------------------------------------
 def turno_batalha(jogador, monstro):
+    
     tocar_musica('musicas\\musica.mp3')
     digitar_texto(f"\nUm novo inimigo surge... 👀")
     digitar_texto(f"\nÉ o temido {monstro.nome}!")
@@ -53,7 +54,7 @@ def turno_batalha(jogador, monstro):
                     dano = 0
                 else:
                     digitar_texto(f"{jogador.nome} diz: \"{jogador.frase_ataque()}\"")
-                    dano = jogador.atacar()
+                    dano = jogador.atacar() - monstro.defesa
 
             elif tipo_ataque == "2":
                 if random.random() < 0.20:  # 20% de chance de errar especial
@@ -99,7 +100,7 @@ def turno_batalha(jogador, monstro):
         else:
             frase = monstro.frase_ataque()
             digitar_texto(f"{monstro.nome} diz: \"{frase}\"")
-            dano_monstro = monstro.atacar()
+            dano_monstro = monstro.atacar() - jogador.defesa
 
         jogador.hp -= dano_monstro
         print(f"{monstro.nome} causou {dano_monstro:.2f} de dano! HP do {jogador.nome}: {jogador.hp}")
@@ -111,6 +112,7 @@ def turno_batalha(jogador, monstro):
             print(f"\n{jogador.nome} foi derrotado! 💀")
             print(f"{jogador.nome} diz: \"{jogador.frase_derrota()}\"")
             break
+        jogador.defesa = jogador.defesa_base
 #-----------------------------------------------------------------
 #BOTAO DE TURNO--------------------------------------------------
         input("\nPressione ENTER para o próximo turno...")
@@ -138,17 +140,32 @@ def introducao():
     digitar_texto( '\nnoob, nível 0, da ralé... Cof, cof...\nBem, quer dizer, todo o Reino')
     digitar_texto ('\nacredita que você é o escolhido\npara nos salvar.\nPortanto, sem delongas,')
     digitar_texto('\nescolha sua classe e vai pro fight!”')
+    escolha()
 
-    escolha = input("Digite '1' para começar ou 'sair' para deixar a aventura: ").strip().lower()
+def escolha():
+    escolha = input("Digite '1' para começar, '2' para creditos ou 'sair' para deixar a aventura: ").strip().lower()
     
     if escolha == "1":
         iniciar_jogo()
         parar_musica()
+    elif escolha == "2":
+        creditos()
+       #return introducao()
     else:
        digitar_texto("\n👋 Adeus, viajante! Que sua jornada um dia recomece!")
        parar_musica()
 
 
+def creditos():
+    digitar_texto('"Este jogo foi produzido com muito carinho e dedicação pela equipe, esperamos que aproveitem!"\n')
+    digitar_texto('Creditos:\n')
+    digitar_texto('Jhonatan Stefani da Silva\n' \
+    'Hernando José de Souza Neto\n' \
+    'Márcio Lisley Brito Pereira\n' \
+    'Renato Andrade Bastos\n' \
+    'Thuani Sampaio da Silva')
+    digitar_texto('e nao menos importante... ChatGPT\n')
+    return escolha()
 
 
 
@@ -166,7 +183,7 @@ def iniciar_jogo():
             digitar_texto("\nGAME OVER! Tente novamente.")
             return
     trocar_musica('musicas\\finalboss.mp3')
-    digitar_texto("\n🔥 O chefe final apareceu! É o Rei Demônio! 🔥")
+    digitar_texto("\n🔥 O chefe final apareceu! É o ERROR-9090! 🔥")
     digitar_texto('\n🔥 O ar fica pesado. A temperatura parece mudar. 🔥')
     digitar_texto('\nO chão treme, e uma presença avassaladora emerge das sombras.')
     digitar_texto('\n“Você chegou longe demais, mortal...”')
