@@ -111,6 +111,12 @@ def turno_batalha(jogador, monstro):
         if jogador.hp <= 0:
             print(f"\n{jogador.nome} foi derrotado! 💀")
             print(f"{jogador.nome} diz: \"{jogador.frase_derrota()}\"")
+            digitar_texto('\n🎙️ Narrador Maluco:')
+            falas_derrota = [
+                "Parabéns! Você morreu... com uma elegância digna de uma vaca escorregando no quiabo. O Reino tá em boas mãos... só que não, mas já era de se esperar. Vou lá achar o próximo otário pra trabalhar de graça dizendo que vai ganhar experiência no estágio, puff!",
+                "Você caiu que nem jaca podre do galho da incompetência... mas relaxa, o importante é participar. (Mentira, é ganhar mesmo, você que é um newbie muito do ruim). Eu devia ter ido ver o filme do Pelé..."
+            ]
+            digitar_texto(random.choice(falas_derrota))
             break
         jogador.defesa = jogador.defesa_base
 #-----------------------------------------------------------------
@@ -145,7 +151,7 @@ def introducao():
 
 def escolha():
     escolha = input("Digite '1' para começar, '2' para creditos ou 'sair' para deixar a aventura: ").strip().lower()
-    
+
     if escolha == "1":
         iniciar_jogo()
         parar_musica()
@@ -186,7 +192,7 @@ def iniciar_jogo():
     digitar_texto(
         '\n“Mas olha... a tarefa é árdua, o monstro é feio, o chão é escorregadio e a taxa de sucesso é de 3%')
     digitar_texto('(sem garantia, nem que venha com o Celso Russomanno).')
-    digitar_texto('Portanto...\nportanto... TE VIRAAAA!”')
+    digitar_texto('Portanto...\n... TE VIRAAAA!”')
     digitar_texto('\n💨 *POOF!*')
 
     ####### **INTRODUÇÃO NOVA: Escolha de Caminho** ####
@@ -197,7 +203,7 @@ def iniciar_jogo():
     digitar_texto(
         "\n 1. Floresta verde e úmida,\ncom cogumelos esquisitos,\nfolhas no bolso e monstros no arbusto.\n🌲 Lar de Goblins agricultores e Orcs marombas.")
     digitar_texto(
-        "\n 2. Deserto amarelo,\nfrita no sol e toma porrada de miragem.\n🏜️ Lar de Esqueletos Coachs e Trolls do Wifi ruim.")
+        "\n 2. Deserto amarelo,\nfrita no sol e toma porrada de miragem.\n🏜️ Lar de Esqueletos Coachs e Trolls do Wifi Ruim.")
 
     caminho = input("\nEscolha seu caminho (1 - Floresta, 2 - Deserto): ").strip()
 
@@ -217,7 +223,14 @@ def iniciar_jogo():
             digitar_texto("\nGAME OVER! Tente novamente.")
             return
     trocar_musica('musicas\\finalboss.mp3')
-    digitar_texto("\n🔥 O chefe final apareceu! É o ERROR-9090! 🔥")
+    digitar_texto("\n🔥 O boss final apareceu! 🔥")
+
+    digitar_texto('\n🎙️ Narrador Maluco:')
+    digitar_texto('“Ahhh... o grande ERROR-9000.')
+    digitar_texto('Metade máquina, metade bug, 100% dor de cabeça e 0% debug.')
+    digitar_texto('Dizem que ele já travou 14 reinos com um único comando.')
+    digitar_texto('Atenção, novato! Ele não trava. Ele TE trava! VOU ZARPAR PRA DE_DUST2, FUI!”')
+
     digitar_texto('\n🔥 O ar fica pesado. A temperatura parece mudar. 🔥')
     digitar_texto('\nO chão treme, e uma presença avassaladora emerge das sombras.')
     digitar_texto('\n“Você chegou longe demais, mortal...”')
@@ -235,8 +248,13 @@ def iniciar_jogo():
             return
 
     digitar_texto("\n🏆 PARABÉNS! Você derrotou todos os inimigos e venceu o jogo! 🎉")
+    digitar_texto('\n🎙️ Narrador Maluco:')
+    falas_vitoria = [
+        "EU TO PASSADA, CHOCADA!!! Gr... Quer dizer... Você venceu mesmo?! Tá certo isso aí, produção?! Bem... até a próxima, banaca!",
+        "Olha... eu falei que você era o Escolhido só por protocolo, mas... EU TAVA CERTO? RÁ! CH#PA, ORÁCULO! Te vejo na próxima catástrofe que não haja ninguém para resolver além de você, estagiário! (motivos de custos não divulgados)"
+    ]
+    digitar_texto(random.choice(falas_vitoria))
 
-introducao()
 
 
 
