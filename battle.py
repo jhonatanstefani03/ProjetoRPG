@@ -63,7 +63,7 @@ def turno_batalha(jogador, monstro):
                     dano = 0
                 else:
                     print(f"{jogador.nome} usou {jogador.ataque_especial}!")
-                    dano = jogador.usar_ataque_especial()
+                    dano = jogador.usar_ataque_especial()  - monstro.defesa
 
             monstro.hp -= dano
             print(f"{jogador.nome} causou {dano:.2f} de dano! HP do {monstro.nome}: {monstro.hp}")
@@ -110,6 +110,7 @@ def turno_batalha(jogador, monstro):
 #JOGADOR  DERROTADO!!----------------------------------------------------------
         if jogador.hp <= 0:
             print(f"\n{jogador.nome} foi derrotado! 💀")
+            
             print(f"{jogador.nome} diz: \"{jogador.frase_derrota()}\"")
             break
         jogador.defesa = jogador.defesa_base
@@ -135,15 +136,22 @@ def digitar_texto(texto, velocidade=0.05):
 
 
 def introducao():
+    print(r""" ____             _                    _     
+|  _ \  _____   _| |    __ _ _ __   __| |___ 
+| | | |/ _ \ \ / / |   / _` | '_ \ / _` / __|
+| |_| |  __/\ V /| |__| (_| | | | | (_| \__ \
+|____/ \___| \_/ |_____\__,_|_| |_|\__,_|___/ """)
+    time.sleep(2)
     tocar_musica('musicas\\musica.mp3')
-    digitar_texto('“Aê, meu filho! Estamos sendo\natacados por criaturas\ninimagináveis. E você! Um novato,')
+    digitar_texto('“\nAê, meu filho! Estamos sendo\natacados por criaturas\ninimagináveis. E você! Um novato,')
     digitar_texto( '\nnoob, nível 0, da ralé... Cof, cof...\nBem, quer dizer, todo o Reino')
     digitar_texto ('\nacredita que você é o escolhido\npara nos salvar.\nPortanto, sem delongas,')
     digitar_texto('\nescolha sua classe e vai pro fight!”')
-    escolha()
+    
+    escolhas()
 
-def escolha():
-    escolha = input("Digite '1' para começar, '2' para creditos ou 'sair' para deixar a aventura: ").strip().lower()
+def escolhas():
+    escolha = input("Digite '1'- para começar\nDigite '2'- para creditos\nDigite '3'-'sair' para deixar a aventura: ").strip().lower()
     
     if escolha == "1":
         iniciar_jogo()
@@ -151,9 +159,12 @@ def escolha():
     elif escolha == "2":
         creditos()
        #return introducao()
-    else:
+    elif escolha =="3":
        digitar_texto("\n👋 Adeus, viajante! Que sua jornada um dia recomece!")
        parar_musica()
+    else:
+       digitar_texto("opção  invalida!\n")
+    return escolhas()
 
 
 def creditos():
@@ -165,7 +176,7 @@ def creditos():
     'Renato Andrade Bastos\n' \
     'Thuani Sampaio da Silva')
     digitar_texto('e nao menos importante... ChatGPT\n')
-    return escolha()
+    return escolhas()
 
 
 
@@ -181,7 +192,7 @@ def iniciar_jogo():
         turno_batalha(jogador, inimigo)
         if jogador.hp <= 0:
             digitar_texto("\nGAME OVER! Tente novamente.")
-            return
+            sys.exit()
     trocar_musica('musicas\\finalboss.mp3')
     digitar_texto("\n🔥 O chefe final apareceu! É o ERROR-9090! 🔥")
     digitar_texto('\n🔥 O ar fica pesado. A temperatura parece mudar. 🔥')
@@ -198,8 +209,7 @@ def iniciar_jogo():
     turno_batalha(jogador,boss)
     if jogador.hp <= 0:
             digitar_texto("\nGAME OVER! Tente novamente.")
-            return
-
+            sys.exit()
     digitar_texto("\n🏆 PARABÉNS! Você derrotou todos os inimigos e venceu o jogo! 🎉")
 
 introducao()
