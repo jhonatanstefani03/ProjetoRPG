@@ -128,7 +128,7 @@ def cena_intro_com_narrador(tela):
             for i, linha in enumerate(render):
                 tela.blit(linha, (60, 340 + i * 25))
 
-        # Texto de instrução: agora centralizado dentro do balão
+        # Texto de instrução: centralizado dentro do balão
         texto_clique = fonte_pequena.render("Clique para continuar...", True, (80, 80, 80))
         texto_rect = texto_clique.get_rect(center=(40 + 520 // 2, 310 + 160 - 20))
         tela.blit(texto_clique, texto_rect.topleft)
