@@ -163,7 +163,7 @@ class Guerreiro(Player):
 #------------------------------------------------------------------------------------
         
 #---------------------------ESCOLHER PERSONAGEM---------------------------------------------------
-def digitar_texto(texto, velocidade=0.05):
+def digitar_texto(texto, velocidade=0.03):
     for caractere in texto:
         if msvcrt.kbhit():
             tecla = msvcrt.getch()

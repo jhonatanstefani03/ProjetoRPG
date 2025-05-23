@@ -118,7 +118,7 @@ def turno_batalha(jogador, monstro):
         input("\nPressione ENTER para o próximo turno...")
 #-----------------------------------------------------------------
 
-def digitar_texto(texto, velocidade=0.05):
+def digitar_texto(texto, velocidade=0.03):
     for caractere in texto:
         if msvcrt.kbhit():  # Verifica se alguma tecla foi pressionada
             tecla = msvcrt.getch()
