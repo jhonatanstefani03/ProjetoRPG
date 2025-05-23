@@ -136,6 +136,7 @@ def digitar_texto(texto, velocidade=0.05):
 
 def introducao():
     tocar_musica('musicas\\musica.mp3')
+    digitar_texto(f'\n🎙️ Narrador Maluco:')
     digitar_texto('“Aê, meu filho! Estamos sendo\natacados por criaturas\ninimagináveis. E você! Um novato,')
     digitar_texto( '\nnoob, nível 0, da ralé... Cof, cof...\nBem, quer dizer, todo o Reino')
     digitar_texto ('\nacredita que você é o escolhido\npara nos salvar.\nPortanto, sem delongas,')
@@ -172,7 +173,23 @@ def iniciar_jogo():
     digitar_texto("\n🎮 Bem-vindo ao RPG de Turnos! 🎮")
     jogador = escolher_classe()
 
-####### **INTRODUÇÃO NOVA: Escolha de Caminho** ####
+    digitar_texto(f'\n🎙️ Narrador Maluco:')
+    digitar_texto(
+        f'“Ah, maravilha. O destino do Reino nas mãos de um acéfalo {jogador.nome}... AHAHAH cof, cof, digo... corajoso soldado.”')
+    time.sleep(1.2)
+    digitar_texto(
+        '\n“Fica tranquilo que não é nenhum soulslike, jovem, o tutorial é básico mesmo! O tempo para aprender é sempre curto...')
+    digitar_texto(
+        'em compensação, os requisitos para qualificação mínima pra esse estágio seriam 12 anos de experiência na NASA')
+    digitar_texto('e mestrado em Necromancia Quântica aplicada à pancadaria...”')
+    digitar_texto('aproveita então que tamo te dando essa chance de aprendizado prático!!')
+    digitar_texto(
+        '\n“Mas olha... a tarefa é árdua, o monstro é feio, o chão é escorregadio e a taxa de sucesso é de 3%')
+    digitar_texto('(sem garantia, nem que venha com o Celso Russomanno).')
+    digitar_texto('Portanto...\nportanto... TE VIRAAAA!”')
+    digitar_texto('\n💨 *POOF!*')
+
+    ####### **INTRODUÇÃO NOVA: Escolha de Caminho** ####
     digitar_texto("\n💨 Você foi teletransportado para uma bifurcação muito curiosa...")
     digitar_texto("“Ó o drama, hein! 2 caminhos... 2 escolhas... 2 tipos de sofrimento.”")
     digitar_texto("“Mas escolhe com sabedoria, hein? Cada rota tem seus próprios 'presentinhos'...”")
