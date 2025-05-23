@@ -157,25 +157,42 @@ def escolha():
 
 
 def creditos():
-    digitar_texto('"Este jogo foi produzido com muito carinho e dedicação pela equipe, esperamos que aproveitem!"\n')
+    digitar_texto('"Este jogo foi produzido com muito carinho, cafeína e dedicação pela equipe, esperamos que aproveitem!"\n')
     digitar_texto('Creditos:\n')
     digitar_texto('Jhonatan Stefani da Silva\n' \
     'Hernando José de Souza Neto\n' \
     'Márcio Lisley Brito Pereira\n' \
     'Renato Andrade Bastos\n' \
     'Thuani Sampaio da Silva')
-    digitar_texto('e nao menos importante... ChatGPT\n')
+    digitar_texto('e não menos importantes... Google, YouTube e o glorioso ChatGPT\n')
     return escolha()
-
-
-
 
 
 def iniciar_jogo():
     digitar_texto("\n🎮 Bem-vindo ao RPG de Turnos! 🎮")
     jogador = escolher_classe()
 
-    inimigos = [Goblin(), Orc(), Esqueleto(), Troll()]  # Agora usamos as classes de monstros!
+####### **INTRODUÇÃO NOVA: Escolha de Caminho** ####
+    digitar_texto("\n💨 Você foi teletransportado para uma bifurcação muito curiosa...")
+    digitar_texto("“Ó o drama, hein! 2 caminhos... 2 escolhas... 2 tipos de sofrimento.”")
+    digitar_texto("“Mas escolhe com sabedoria, hein? Cada rota tem seus próprios 'presentinhos'...”")
+
+    digitar_texto(
+        "\n 1. Floresta verde e úmida,\ncom cogumelos esquisitos,\nfolhas no bolso e monstros no arbusto.\n🌲 Lar de Goblins agricultores e Orcs marombas.")
+    digitar_texto(
+        "\n 2. Deserto amarelo,\nfrita no sol e toma porrada de miragem.\n🏜️ Lar de Esqueletos Coachs e Trolls do Wifi ruim.")
+
+    caminho = input("\nEscolha seu caminho (1 - Floresta, 2 - Deserto): ").strip()
+
+    if caminho == "1":
+        inimigos = [Goblin(), Orc()]
+        digitar_texto("\n🌲 Você adentra a floresta escura... Sons estranhos ecoam entre as árvores.")
+    elif caminho == "2":
+        inimigos = [Esqueleto(), Troll()]
+        digitar_texto("\n🏜️ Você caminha pelas dunas escaldantes do deserto... Algo se move sob a areia.")
+    else:
+        digitar_texto("🚫 Caminho inválido! Você tropeça e volta para casa. ☠️")
+        return
 
     for inimigo in inimigos:
         turno_batalha(jogador, inimigo)
