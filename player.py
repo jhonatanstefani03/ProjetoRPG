@@ -1,4 +1,7 @@
 import random
+import time
+import sys
+import msvcrt
 
 #----------------- CLASSE PLAYER-----------------------------------------------------
 class Player:
@@ -160,13 +163,36 @@ class Guerreiro(Player):
 #------------------------------------------------------------------------------------
         
 #---------------------------ESCOLHER PERSONAGEM---------------------------------------------------
+def digitar_texto(texto, velocidade=0.03):
+    for caractere in texto:
+        if msvcrt.kbhit():
+            tecla = msvcrt.getch()
+            if tecla == b'\r':
+                print(texto)
+                return
+        sys.stdout.write(caractere)
+        sys.stdout.flush()
+        time.sleep(velocidade)
+    print()
+
 def escolher_classe():
-    print("Escolha sua classe:")
-    print("1 - Mago 🪄")
-    print("2 - Guerreiro ⚔️")
-    
+    digitar_texto("\n1. 🪄 Mago - Atributos:")
+    digitar_texto("Fraco dos músculos;")
+    digitar_texto("Forte no blá-blá-blá arcano;")
+    digitar_texto("Camper profissional;")
+    digitar_texto("Vai com calma que mana evapora fácil;")
+    digitar_texto("Morre assim que bate o dedinho do pé!")
+    digitar_texto("🧙 Ideal pra quem quer causar estrago sem sujar a túnica.\n")
+
+    digitar_texto("2. ⚔️ Guerreiro - Atributos:")
+    digitar_texto("Forte dos músculos;")
+    digitar_texto("Neurônio não é o ponto forte;")
+    digitar_texto("Bate primeiro, pensa depois (se conseguir pensar, é claro);")
+    digitar_texto("Capaz de resolver conflitos com a delicadeza de um bode raivoso.")
+    digitar_texto("💪 Ideal pra quem acha que ‘tática’ é nome de remédio.\n")
+
     escolha = input("Digite o número correspondente à sua classe: ")
-    
+
     if escolha == "1":
         return Mago()
     elif escolha == "2":

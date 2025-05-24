@@ -112,6 +112,12 @@ def turno_batalha(jogador, monstro):
             print(f"\n{jogador.nome} foi derrotado! 💀")
             
             print(f"{jogador.nome} diz: \"{jogador.frase_derrota()}\"")
+            digitar_texto('\n🎙️ Narrador Maluco:')
+            falas_derrota = [
+                "Parabéns! Você morreu... com uma elegância digna de uma vaca escorregando no quiabo. O Reino tá em boas mãos... só que não, mas já era de se esperar. Vou lá achar o próximo otário pra trabalhar de graça dizendo que vai ganhar experiência no estágio, puff!",
+                "Você caiu que nem jaca podre do galho da incompetência... mas relaxa, o importante é participar. (Mentira, é ganhar mesmo, você que é um newbie muito do ruim). Eu devia ter ido ver o filme do Pelé..."
+            ]
+            digitar_texto(random.choice(falas_derrota))
             break
         jogador.defesa = jogador.defesa_base
 #-----------------------------------------------------------------
@@ -119,7 +125,7 @@ def turno_batalha(jogador, monstro):
         input("\nPressione ENTER para o próximo turno...")
 #-----------------------------------------------------------------
 
-def digitar_texto(texto, velocidade=0.05):
+def digitar_texto(texto, velocidade=0.03):
     for caractere in texto:
         if msvcrt.kbhit():  # Verifica se alguma tecla foi pressionada
             tecla = msvcrt.getch()
@@ -143,15 +149,15 @@ def introducao():
 |____/ \___| \_/ |_____\__,_|_| |_|\__,_|___/ """)
     time.sleep(2)
     tocar_musica('musicas\\musica.mp3')
-    digitar_texto('“\nAê, meu filho! Estamos sendo\natacados por criaturas\ninimagináveis. E você! Um novato,')
+    digitar_texto('“Aê, meu filho! Estamos sendo\natacados por criaturas\ninimagináveis. E você! Um novato,')
     digitar_texto( '\nnoob, nível 0, da ralé... Cof, cof...\nBem, quer dizer, todo o Reino')
     digitar_texto ('\nacredita que você é o escolhido\npara nos salvar.\nPortanto, sem delongas,')
     digitar_texto('\nescolha sua classe e vai pro fight!”')
     
     escolhas()
 
-def escolhas():
-    escolha = input("Digite '1'- para começar\nDigite '2'- para creditos\nDigite '3'-'sair' para deixar a aventura: ").strip().lower()
+def escolha():
+    escolha = input("Digite '1' para começar, '2' para creditos ou 'sair' para deixar a aventura: ").strip().lower()
     
     if escolha == "1":
         iniciar_jogo()
@@ -168,7 +174,7 @@ def escolhas():
 
 
 def creditos():
-    digitar_texto('"Este jogo foi produzido com muito carinho e dedicação pela equipe, esperamos que aproveitem!"\n')
+    digitar_texto('"Este jogo foi produzido com muito carinho, cafeína e dedicação pela equipe, esperamos que aproveitem!"\n')
     digitar_texto('Creditos:\n')
     digitar_texto('Jhonatan Stefani da Silva\n' \
     'Hernando José de Souza Neto\n' \
@@ -176,17 +182,50 @@ def creditos():
     'Renato Andrade Bastos\n' \
     'Thuani Sampaio da Silva')
     digitar_texto('e nao menos importante... ChatGPT\n')
-    return escolhas()
-
-
-
+    return escolha()
 
 
 def iniciar_jogo():
     digitar_texto("\n🎮 Bem-vindo ao RPG de Turnos! 🎮")
     jogador = escolher_classe()
 
-    inimigos = [Goblin(), Orc(), Esqueleto(), Troll()]  # Agora usamos as classes de monstros!
+    digitar_texto(f'\n🎙️ Narrador Maluco:')
+    digitar_texto(
+        f'“Ah, maravilha. O destino do Reino nas mãos de um acéfalo {jogador.nome}... AHAHAH cof, cof, digo... corajoso soldado.”')
+    time.sleep(1.2)
+    digitar_texto(
+        '\n“Fica tranquilo que não é nenhum soulslike, jovem, o tutorial é básico mesmo! O tempo para aprender é sempre curto...')
+    digitar_texto(
+        'em compensação, os requisitos para qualificação mínima pra esse estágio seriam 12 anos de experiência na NASA')
+    digitar_texto('e mestrado em Necromancia Quântica aplicada à pancadaria...”')
+    digitar_texto('aproveita então que tamo te dando essa chance de aprendizado prático!!')
+    digitar_texto(
+        '\n“Mas olha... a tarefa é árdua, o monstro é feio, o chão é escorregadio e a taxa de sucesso é de 3%')
+    digitar_texto('(sem garantia, nem que venha com o Celso Russomanno).')
+    digitar_texto('Portanto...\n... TE VIRAAAA!”')
+    digitar_texto('\n💨 *POOF!*')
+
+    ####### **INTRODUÇÃO NOVA: Escolha de Caminho** ####
+    digitar_texto("\n💨 Você foi teletransportado para uma bifurcação muito curiosa...")
+    digitar_texto("“Ó o drama, hein! 2 caminhos... 2 escolhas... 2 tipos de sofrimento.”")
+    digitar_texto("“Mas escolhe com sabedoria, hein? Cada rota tem seus próprios 'presentinhos'...”")
+
+    digitar_texto(
+        "\n 1. Floresta verde e úmida,\ncom cogumelos esquisitos,\nfolhas no bolso e monstros no arbusto.\n🌲 Lar de Goblins agricultores e Orcs marombas.")
+    digitar_texto(
+        "\n 2. Deserto amarelo,\nfrita no sol e toma porrada de miragem.\n🏜️ Lar de Esqueletos Coachs e Trolls do Wifi Ruim.")
+
+    caminho = input("\nEscolha seu caminho (1 - Floresta, 2 - Deserto): ").strip()
+
+    if caminho == "1":
+        inimigos = [Goblin(), Orc()]
+        digitar_texto("\n🌲 Você adentra a floresta escura... Sons estranhos ecoam entre as árvores.")
+    elif caminho == "2":
+        inimigos = [Esqueleto(), Troll()]
+        digitar_texto("\n🏜️ Você caminha pelas dunas escaldantes do deserto... Algo se move sob a areia.")
+    else:
+        digitar_texto("🚫 Caminho inválido! Você tropeça e volta para casa. ☠️")
+        return
 
     for inimigo in inimigos:
         turno_batalha(jogador, inimigo)
@@ -194,7 +233,14 @@ def iniciar_jogo():
             digitar_texto("\nGAME OVER! Tente novamente.")
             sys.exit()
     trocar_musica('musicas\\finalboss.mp3')
-    digitar_texto("\n🔥 O chefe final apareceu! É o ERROR-9090! 🔥")
+    digitar_texto("\n🔥 O boss final apareceu! 🔥")
+
+    digitar_texto('\n🎙️ Narrador Maluco:')
+    digitar_texto('“Ahhh... o grande ERROR-9000.')
+    digitar_texto('Metade máquina, metade bug, 100% dor de cabeça e 0% debug.')
+    digitar_texto('Dizem que ele já travou 14 reinos com um único comando.')
+    digitar_texto('Atenção, novato! Ele não trava. Ele TE trava! VOU ZARPAR PRA DE_DUST2, FUI!”')
+
     digitar_texto('\n🔥 O ar fica pesado. A temperatura parece mudar. 🔥')
     digitar_texto('\nO chão treme, e uma presença avassaladora emerge das sombras.')
     digitar_texto('\n“Você chegou longe demais, mortal...”')
@@ -211,8 +257,13 @@ def iniciar_jogo():
             digitar_texto("\nGAME OVER! Tente novamente.")
             sys.exit()
     digitar_texto("\n🏆 PARABÉNS! Você derrotou todos os inimigos e venceu o jogo! 🎉")
+    digitar_texto('\n🎙️ Narrador Maluco:')
+    falas_vitoria = [
+        "EU TO PASSADA, CHOCADA!!! Gr... Quer dizer... Você venceu mesmo?! Tá certo isso aí, produção?! Bem... até a próxima, banaca!",
+        "Olha... eu falei que você era o Escolhido só por protocolo, mas... EU TAVA CERTO? RÁ! CH#PA, ORÁCULO! Te vejo na próxima catástrofe que não haja ninguém para resolver além de você, estagiário! (motivos de custos não divulgados)"
+    ]
+    digitar_texto(random.choice(falas_vitoria))
 
-introducao()
 
 
 
